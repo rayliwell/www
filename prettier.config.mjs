@@ -1,3 +1,4 @@
+/** @type {import('prettier').Config} */
 export default {
   arrowParens: 'always',
   htmlWhitespaceSensitivity: 'strict',

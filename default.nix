@@ -22,6 +22,10 @@
     inherit (import gitignoreSrc { inherit lib; }) gitignoreSource;
     in
       gitignoreSource ./.;
+
+    installPhase = ''
+      cp -r dist $out
+    '';
   };
 
   deps =
