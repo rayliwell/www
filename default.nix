@@ -25,6 +25,7 @@
 
     installPhase = ''
       cp -r dist $out
+      ln -s $out/lib/node_modules/.bin $out/bin
     '';
   };
 
