@@ -16,6 +16,7 @@
       system:
       let
         pkgs = nixpkgs.legacyPackages.${system};
+        nodejs = pkgs.nodejs_21;
       in
       {
         packages = rec {
@@ -23,7 +24,7 @@
             name = "www";
             src = ./.;
 
-            buildInputs = [ pkgs.nodejs_18 ];
+            buildInputs = [ nodejs ];
 
             npmDepsHash = "sha256-gLRr3Vru1Fot3HMllid9PITP6hJQIv+MAxNjpJblmJE=";
 
@@ -43,8 +44,8 @@
               name = "www";
               paths = [
                 default
+                nodejs
                 pkgs.bash
-                pkgs.nodejs_18
               ];
               pathsToLink = [
                 "/bin"
