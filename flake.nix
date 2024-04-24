@@ -63,6 +63,10 @@
             };
           };
         };
+
+        devShells = {
+          default = pkgs.mkShell { buildInputs = [ nodejs ]; };
+        };
       }
     );
 }
