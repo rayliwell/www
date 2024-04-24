@@ -35,6 +35,32 @@
               ln -s $out/app/node_modules/.bin $out/bin
             '';
           };
+
+          docker = pkgs.dockerTools.buildImage {
+            name = "www";
+            tag = "latest";
+            copyToRoot = pkgs.buildEnv {
+              name = "www";
+              paths = [
+                default
+                pkgs.bash
+                pkgs.nodejs_18
+              ];
+              pathsToLink = [
+                "/bin"
+                "/lib"
+                "/app"
+              ];
+            };
+            config = {
+              WorkingDir = "/app";
+              Cmd = [
+                "npm"
+                "run"
+                "start"
+              ];
+            };
+          };
         };
       }
     );
