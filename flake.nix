@@ -37,10 +37,10 @@
             '';
           };
 
-          docker = pkgs.dockerTools.buildImage {
+          docker = pkgs.dockerTools.buildLayeredImage {
             name = "www";
             tag = "latest";
-            copyToRoot = pkgs.buildEnv {
+            contents = pkgs.buildEnv {
               name = "www";
               paths = [
                 default
