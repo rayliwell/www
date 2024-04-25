@@ -20,41 +20,103 @@
       in
       {
         packages = rec {
-          default = pkgs.buildNpmPackage {
+          default = pkgs.stdenv.mkDerivation {
             name = "www";
+            src = ./.;
+
+            buildInputs = [
+              nodejs
+              installNodeModules
+            ];
+
+            buildPhase = ''
+              mkdir $out
+              cp -a ./. $out/
+              cd $out
+              installNodeModules
+              npm run build
+            '';
+          };
+
+          installNodeModules = pkgs.writeShellApplication {
+            name = "installNodeModules";
+
+            text = ''
+              test -d node_modules && rm -rf node_modules
+              cp -a ${nodeModules}/lib/node_modules/. node_modules/
+              chmod 775 -R node_modules
+            '';
+          };
+
+          deployToCloudflareWorkers = pkgs.writeShellApplication {
+            name = "deployToCloudflareWorkers";
+
+            runtimeInputs = [ nodeModules ];
+
+            text = ''
+              cd "$(mktemp -d)"
+              cp -a ${default}/. ./
+              chmod 775 -R .
+              wrangler pages deploy --project-name www dist
+            '';
+          };
+
+          lint = pkgs.writeShellApplication {
+            name = "lint";
+
+            runtimeInputs = [
+              nodeModules
+              installNodeModules
+            ];
+
+            text = ''
+              installNodeModules
+              prettier ./ --check
+              eslint ./src
+            '';
+          };
+
+          nodeModules = pkgs.buildNpmPackage {
+            name = "node_modules";
             src = ./.;
 
             buildInputs = [ nodejs ];
 
-            npmDepsHash = "sha256-gLRr3Vru1Fot3HMllid9PITP6hJQIv+MAxNjpJblmJE=";
-
-            buildPhase = ''
-              mkdir -p $out/app
-              cp -r . $out/app
-              cd $out/app
-              npm run build
-              ln -s $out/app/node_modules/.bin $out/bin
+            npmDepsHash = "sha256-Kc3w8yplbDdOvMQk6GYg8NGLxPKAOysKSXEbl/BPIlo=";
+            dontNpmBuild = true;
+            installPhase = ''
+              mkdir -p $out/lib/node_modules
+              cp -a ./node_modules/. $out/lib/node_modules/
+              ln -s $out/lib/node_modules/.bin $out/bin
             '';
           };
 
           docker = pkgs.dockerTools.buildLayeredImage {
             name = "www";
             tag = "latest";
+
             contents = pkgs.buildEnv {
               name = "www";
+
               paths = [
-                default
                 nodejs
                 pkgs.bash
               ];
+
               pathsToLink = [
                 "/bin"
                 "/lib"
-                "/app"
               ];
             };
+
+            extraCommands = ''
+              cp -a ${default}/. app/
+              chmod 775 -R app
+            '';
+
             config = {
               WorkingDir = "/app";
+
               Cmd = [
                 "npm"
                 "run"

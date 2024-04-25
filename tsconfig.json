@@ -9,7 +9,7 @@
       "@style/*": ["src/style/*"],
       "@components/*": ["src/components/*"],
       "@layouts/*": ["src/layouts/*"]
-    },
+    }
   },
   "plugins": [
     {
