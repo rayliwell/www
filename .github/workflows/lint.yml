@@ -1,6 +1,7 @@
 name: Enforce code style
 
-on: [workflow_call, workflow_dispatch]
+on:
+  pull_request:
 
 jobs:
   lint:

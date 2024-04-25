@@ -48,6 +48,17 @@
             '';
           };
 
+          deployToContainerRegistry = pkgs.writeShellApplication {
+            name = "deployToContainerRegistry";
+
+            runtimeInputs = [ pkgs.docker ];
+
+            text = ''
+              docker load -i ${container}
+              docker image push ghcr.io/rayliwell/www:latest
+            '';
+          };
+
           deployToCloudflareWorkers = pkgs.writeShellApplication {
             name = "deployToCloudflareWorkers";
 
@@ -91,8 +102,8 @@
             '';
           };
 
-          docker = pkgs.dockerTools.buildLayeredImage {
-            name = "www";
+          container = pkgs.dockerTools.buildLayeredImage {
+            name = "ghcr.io/rayliwell/www";
             tag = "latest";
 
             contents = pkgs.buildEnv {
