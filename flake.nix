@@ -55,6 +55,7 @@
 
             text = ''
               docker load -i ${container}
+              echo "$GITHUB_TOKEN" | docker login ghcr.io -u "$GITHUB_ACTOR" --password-stdin
               docker image push ghcr.io/rayliwell/www:latest
             '';
           };

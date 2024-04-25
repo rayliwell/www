@@ -62,4 +62,5 @@ jobs:
       - name: Use `docker` CLI to push container to the registry
         run: nix run .#deployToContainerRegistry
         env:
-          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GIHTUB_ACTOR: ${{ github.actor }}
