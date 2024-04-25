@@ -3,9 +3,16 @@ name: Deploy to Cloudflare Pages
 on: workflow_dispatch
 
 jobs:
+  build:
+    permissions:
+      id-token: write
+      contents: read
+    uses: ./.github/workflows/build.yml
+
   deployment:
     name: Build and deploy
-    environment: 
+    needs: build
+    environment:
       name: Production
       url: ${{ steps.publish.outputs.url }}
     runs-on: ubuntu-latest
@@ -23,11 +30,9 @@ jobs:
         with:
           primary-key: nix-${{ runner.os }}-${{ hashFiles('**/*.nix', '**/package-lock.json') }}
           restore-prefixes-first-match: nix-${{ runner.os }}
-      - name: Build application
-        run: nix build .
       - name: Publish to Cloudflare Pages
-        run: echo "url=$(nix shell . --command wrangler pages deploy --project-name www result/app/dist | grep -Po '\S+pages.dev$')" >> $GITHUB_OUTPUT
+        run: echo "url=$(nix run .#deployToCloudflareWorkers | grep -Po '\S+pages.dev$')" >> $GITHUB_OUTPUT
         id: publish
-        env: 
+        env:
           CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
           CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
