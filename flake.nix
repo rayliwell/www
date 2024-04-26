@@ -55,7 +55,7 @@
 
             text = ''
               docker load -i ${container}
-              docker tag rayliwell/www ghcr.io/rayliiwell/www
+              docker tag rayliwell/www ghcr.io/rayliwell/www
               echo "$GITHUB_TOKEN" | docker login ghcr.io -u "$GITHUB_ACTOR" --password-stdin
               docker image push ghcr.io/rayliwell/www:latest
             '';
