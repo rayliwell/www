@@ -48,15 +48,28 @@
             '';
           };
 
-          deployToContainerRegistry = pkgs.writeShellApplication {
-            name = "deployToContainerRegistry";
+          deployToGithubContainerRegistry = pkgs.writeShellApplication {
+            name = "deployToGithubContainerRegistry";
 
             runtimeInputs = [ pkgs.docker ];
 
             text = ''
               docker load -i ${container}
+              docker tag rayliwell/www ghcr.io/rayliiwell/www
               echo "$GITHUB_TOKEN" | docker login ghcr.io -u "$GITHUB_ACTOR" --password-stdin
               docker image push ghcr.io/rayliwell/www:latest
+            '';
+          };
+
+          deployToDockerContainerRegistry = pkgs.writeShellApplication {
+            name = "deployToDockerContainerRegistry";
+
+            runtimeInputs = [ pkgs.docker ];
+
+            text = ''
+              docker load -i ${container}
+              echo "$DOCKERHUB_TOKEN" | docker login -u "$DOCKERHUB_USERNAME" --password-stdin
+              docker image push rayliwell/www:latest
             '';
           };
 
@@ -104,7 +117,7 @@
           };
 
           container = pkgs.dockerTools.buildLayeredImage {
-            name = "ghcr.io/rayliwell/www";
+            name = "rayliwell/www";
             tag = "latest";
 
             contents = pkgs.buildEnv {
