@@ -16,7 +16,7 @@
       system:
       let
         pkgs = nixpkgs.legacyPackages.${system};
-        nodejs = pkgs.nodejs_21;
+        nodejs = pkgs.nodejs_22;
       in
       {
         packages = rec {
