@@ -5,6 +5,8 @@ import icons from 'vite-icon-loader'
 
 export default defineConfig({
   integrations: [tailwind()],
+  scopedStyleStrategy: 'class',
+  compressHTML: false,
   devToolbar: {
     enabled: false,
   },
