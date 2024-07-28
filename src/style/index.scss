@@ -1,3 +1,14 @@
 :root {
   color-scheme: dark;
+  background-color: black;
+}
+
+// Required for our `vite-icon-loader` config
+.icon {
+  display: inline-block;
+  height: 1em;
+  width: 1em;
+  background-color: currentColor;
+  mask-image: var(--url);
+  mask-size: 100%;
 }
