@@ -1,0 +1,18 @@
+.codering {
+  $size: 75vh;
+  width: $size;
+  height: $size;
+  top: calc(50vh - $size * 0.55);
+  left: calc(100vw - $size * 0.55);
+
+  animation: animation 60s infinite linear;
+}
+
+@keyframes animation {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}

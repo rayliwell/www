@@ -31,7 +31,15 @@ export default {
         secondary: 'rgb(var(--secondary) / <alpha-value>)',
       },
       fontFamily: {
+        normal: ['"IBM Plex Sans"', 'sans-serif'],
+        mono: ['"IBM Plex Mono"', 'sans-serif'],
         title: ['"Exo 2"', 'sans-serif'],
+      },
+      zIndex: {
+        menu: 2,
+        topbar: 1,
+        content: 0,
+        background: -1,
       },
     },
   },
