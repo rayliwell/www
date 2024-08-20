@@ -1,14 +1,19 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
 :root {
   color-scheme: dark;
   background-color: black;
 }
 
-// Required for our `vite-icon-loader` config
-.icon {
-  display: inline-block;
-  height: 1em;
-  width: 1em;
-  background-color: currentColor;
-  mask-image: var(--url);
-  mask-size: 100%;
+@media print {
+  body {
+    font-size: 16px!important;
+    print-color-adjust: exact;
+  }
+  @page {
+    size: A4 portrait;
+    margin: 0;
+  }
 }

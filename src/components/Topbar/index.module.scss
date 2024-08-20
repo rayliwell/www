@@ -1,0 +1,8 @@
+.spin {
+  transition: 0.5s;
+
+  &:hover {
+    transition: 1s;
+    transform: rotate(360deg);
+  }
+}

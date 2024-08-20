@@ -1,0 +1,20 @@
+.background {
+  background-size: 24px 24px;
+  background-image: radial-gradient(circle, rgb(var(--primary) / 0.4) 1px, rgba(0, 0, 0, 0) 1px);
+  mask-image: linear-gradient(to top, transparent 0%, black 100%);
+}
+
+.menu {
+  &:popover-open {
+    animation: slideOutAnimation 0.1s ease;
+  }
+}
+
+@keyframes slideOutAnimation {
+  from {
+    transform: translateX(-100%);
+  }
+  to {
+    transform: translateX(0%);
+  }
+}
