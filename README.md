@@ -1,5 +1,5 @@
 <div align="center">
-  <a href="https://rayliwell.com/"><img alt="Logo" width="150" height="150" src="./assets/favicon.svg" /></a>
+  <a href="https://rayliwell.com/"><img alt="Logo" width="150" height="150" src="./public/icon.svg" /></a>
   <h1><a href="https://rayliwell.com/">My personal website</a></h1>
 
 [![GitHub License](https://img.shields.io/github/license/rayliwell/www?color=purple)](https://github.com/rayliwell/www/blob/main/LICENSE)
