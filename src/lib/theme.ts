@@ -1,44 +1,10 @@
-import { defaultColor, isColor, type ColorTheme } from '@lib/colors'
+const colors = ['blue', 'pink', 'green', 'orange', 'purple', 'red'] as const
 
-let html: HTMLElement
-let icon: HTMLLinkElement
-let data: string | undefined
-
-if (typeof window !== 'undefined') {
-  html = document.documentElement
-  icon = document.getElementById('themed-icon') as HTMLLinkElement
-
-  addEventListener(
-    'storage',
-    ({ newValue }) => newValue && updateColorTheme(newValue as ColorTheme)
-  )
-
-  setColorTheme(localStorage.getItem('color'))
+export function isColor(color: any): color is ColorTheme {
+  return typeof color === 'string' && colors.includes(color as ColorTheme)
 }
 
-async function faviconData() {
-  if (!data) {
-    data = 'data:image/svg+xml,' + encodeURIComponent(await (await fetch('/icon.svg')).text())
-  }
+export type ColorTheme = (typeof colors)[number]
 
-  return data
-}
-
-export async function updateFavicon() {
-  const style = window.getComputedStyle(document.documentElement)
-  icon.href = (await faviconData())
-    .replace('%2338bdf8', encodeURIComponent('rgb(' + style.getPropertyValue('--primary') + ')'))
-    .replace('%232563eb', encodeURIComponent('rgb(' + style.getPropertyValue('--secondary') + ')'))
-}
-
-export async function updateColorTheme(color: ColorTheme) {
-  html.dataset.colorTheme = color
-  updateFavicon()
-}
-
-export async function setColorTheme(color: any) {
-  const currColor = isColor(color) ? color : defaultColor
-
-  localStorage.setItem('color', currColor)
-  updateColorTheme(currColor)
-}
+export const defaultColor: ColorTheme = 'blue'
+export default colors

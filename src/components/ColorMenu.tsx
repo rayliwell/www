@@ -1,12 +1,14 @@
 'use client'
 
-import colors from '@lib/colors'
+import colors from '@lib/theme'
 
-import { setColorTheme } from '@lib/theme'
+import { useColorTheme } from './ThemeManger'
 
 export const id = 'colorMenu'
 
 export default function ColorMenu() {
+  let { setTheme } = useColorTheme()
+
   return (
     <div
       id={id}
@@ -18,7 +20,7 @@ export default function ColorMenu() {
           key={color}
           aria-label={color}
           data-color-theme={color}
-          onClick={() => setColorTheme(color)}
+          onClick={() => setTheme(color)}
         />
       ))}
     </div>
