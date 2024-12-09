@@ -1,3 +1,7 @@
+import '@fontsource/exo-2/latin-900.css' // black
+import '@fontsource/noto-sans/latin-500.css' // medium
+import '@fontsource/noto-sans/latin-700.css' // extra-bold
+
 import type { Metadata } from 'next'
 
 import '@style/index.scss'

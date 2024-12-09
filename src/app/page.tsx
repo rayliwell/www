@@ -1,5 +1,3 @@
-import '@fontsource/exo-2/latin-900.css'
-
 import CodeRing from '@components/CodeRing'
 import LinesAnimation from '@components/LinesAnimation'
 

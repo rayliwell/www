@@ -62,8 +62,8 @@ export default {
         secondary: 'rgb(var(--secondary) / <alpha-value>)',
       },
       fontFamily: {
-        normal: ['"IBM Plex Sans"', 'sans-serif'],
-        mono: ['"IBM Plex Mono"', 'sans-serif'],
+        normal: ['"Noto Sans"', 'sans-serif'],
+        mono: ['"Jetbrains Mono"', 'sans-serif'],
         title: ['"Exo 2"', 'sans-serif'],
       },
       zIndex: {
