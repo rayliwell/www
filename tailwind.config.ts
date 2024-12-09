@@ -1,23 +1,54 @@
-import type { Config } from 'tailwindcss'
-import plugin from 'tailwindcss/plugin'
 import typographyPlugin from '@tailwindcss/typography'
 import scrollerPlugin from 'tailwindcss-scroller'
 
-import { join } from 'path'
+import plugin from 'tailwindcss/plugin'
+import { join, relative, basename, extname } from 'node:path'
+import { readdirSync } from 'node:fs'
 
-const maskPlugin = plugin(({ matchUtilities, theme }) => {
-  matchUtilities({
-    mask: (value) => ({
-      maskImage: `url(${join(theme('assetsPath'), value + '.svg')});`,
-      maskSize: '100% 100%',
-    }),
+function iconPlugin(
+  utilityName: string,
+  resolvePath: string,
+  options?: {
+    property?: string
+    extraRules?: object
+    filesystemPath?: string
+    webpackModule?: boolean
+  }
+) {
+  return plugin(({ matchUtilities }) => {
+    let { property, extraRules, filesystemPath, webpackModule } = {
+      property: 'maskImage',
+      extraRules: {
+        maskSize: '100% 100%',
+      },
+      filesystemPath: `node_modules/${resolvePath}`,
+      webpackModule: false,
+      ...options,
+    }
+
+    matchUtilities(
+      {
+        [utilityName]: (iconPath) => ({
+          [property]: `url(${webpackModule ? '~' : ''}${join(resolvePath, iconPath)})`,
+          ...extraRules,
+        }),
+      },
+      {
+        values: Object.fromEntries(
+          readdirSync(filesystemPath, { recursive: true, withFileTypes: true })
+            .map((f) => join(f.parentPath, f.name))
+            .filter((f) => extname(f) === '.svg')
+            .map((f) => [basename(f, '.svg'), relative(filesystemPath, f)])
+        ),
+      }
+    )
   })
-})
+}
+
 
 export default {
   content: ['./src/**/*.{,js,jsx,mdx,tsx}'],
   theme: {
-    assetsPath: '/',
     scroller: {
       title: {
         stopTime: 1000,
@@ -43,5 +74,28 @@ export default {
       },
     },
   },
-  plugins: [maskPlugin, typographyPlugin, scrollerPlugin],
-} as Config
+  plugins: [
+    iconPlugin('mask', '/', { filesystemPath: 'public' }),
+    iconPlugin('material', '@mdi/svg', {
+      webpackModule: true,
+    }),
+    iconPlugin('logos', 'simple-icons', {
+      webpackModule: true,
+    }),
+    iconPlugin('vscode', 'vscode-icons', {
+      property: 'backgroundImage',
+      webpackModule: true,
+    }),
+    iconPlugin('emoji', '@twemoji/svg', {
+      property: 'backgroundImage',
+      webpackModule: true,
+    }),
+    iconPlugin('lines', 'line-md', {
+      webpackModule: true,
+    }),
+    iconPlugin('spinners', 'svg-spinners', {
+      webpackModule: true,
+    }),
+    scrollerPlugin,
+  ],
+}
