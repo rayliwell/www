@@ -45,6 +45,38 @@ function iconPlugin(
   })
 }
 
+function containerPlugin() {
+  return plugin(({ addComponents, theme }) => {
+    let containerSize = (size: string, spacing: number) =>
+      size === '100%'
+        ? `calc(100% - ${theme(`spacing.${spacing}`)})`
+        : `calc(${theme(`screens.${size}`)} - ${theme(`spacing.${spacing}`)})`
+
+    let zeroSize = containerSize('100%', 4)
+    let minSize = containerSize('sm', 4)
+    let midSize = containerSize('md', 4)
+    let maxSize = containerSize('lg', 4)
+    let maxmaxSize = containerSize('xl', 32)
+
+    addComponents({
+      '.container': {
+        maxWidth: zeroSize,
+        '@screen sm': {
+          maxWidth: minSize,
+        },
+        '@screen md': {
+          maxWidth: midSize,
+        },
+        '@screen lg': {
+          maxWidth: maxSize,
+        },
+        '@screen xl': {
+          maxWidth: maxmaxSize,
+        },
+      },
+    })
+  })
+}
 
 export default {
   content: ['./src/**/*.{,js,jsx,mdx,tsx}'],
@@ -74,7 +106,11 @@ export default {
       },
     },
   },
+  corePlugins: {
+    container: false,
+  },
   plugins: [
+    containerPlugin(),
     iconPlugin('mask', '/', { filesystemPath: 'public' }),
     iconPlugin('material', '@mdi/svg', {
       webpackModule: true,
