@@ -1,6 +1,6 @@
 .background {
   background-size: 24px 24px;
-  background-image: radial-gradient(circle, rgb(var(--primary) / 0.4) 1px, rgba(0, 0, 0, 0) 1px);
+  background-image: radial-gradient(circle, theme("colors.primary / 0.4") 1px, rgba(0, 0, 0, 0) 1px);
   mask-image: linear-gradient(to top, transparent 0%, black 100%);
 }
 
