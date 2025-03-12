@@ -1,0 +1,32 @@
+.background {
+  background-size: 24px 24px;
+  background-image: radial-gradient(circle, theme("colors.primary / 0.4") 1px, theme("colors.background") 1px);
+}
+
+.left {
+  animation: left 1s infinite linear;
+  mask-image: linear-gradient(to right, transparent 0%, theme("colors.background") 100%);
+}
+
+.right {
+  animation: right 1s infinite linear;
+  mask-image: linear-gradient(to left, transparent 0%, theme("colors.background") 100%);
+}
+
+@keyframes left {
+  from {
+    background-position: 0px 24px;
+  }
+  to {
+    background-position: -24px 24px;
+  }
+}
+
+@keyframes right {
+  from {
+    background-position: -24px 24px;
+  }
+  to {
+    background-position: 0px 24px;
+  }
+}
