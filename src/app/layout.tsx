@@ -28,19 +28,19 @@ export default function RootLayout({
         lang='en'
         className='antialiased font-medium font-normal text-[80%] sm:text-[90%] md:text-[100%] selection:bg-secondary selection:bg-opacity-50 bg-background'
       >
-      <head>
+        <head>
           <Favicon />
           <ThemeColor />
           <meta name='robots' content='noindex' />
-      </head>
-      <body className='w-full h-screen overflow-y-hidden'>
-        <Sidebar />
-        <ColorMenu />
-        <div id='scrollArea' className='flex flex-col overflow-y-auto w-full h-full'>
-          <Topbar />
-          <main className='w-full grow z-content'>{children}</main>
-        </div>
-      </body>
+        </head>
+        <body className='w-full h-dvh overflow-y-hidden text-text'>
+          <Sidebar />
+          <ColorMenu />
+          <div id='scrollArea' className='flex flex-col overflow-y-auto w-full h-full'>
+            <Topbar />
+            <main className='w-full h-[calc(100%-4.5rem)] z-content' children={children} />
+          </div>
+        </body>
       </Html>
     </ThemeProvider>
   )

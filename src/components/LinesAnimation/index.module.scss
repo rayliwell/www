@@ -1,14 +1,14 @@
 .background {
   background-size: 100% 24px;
-  background-image: linear-gradient(to bottom, transparent 1px, black 1px),
+  background-image: linear-gradient(to bottom, transparent 1px, theme("colors.background") 1px),
     linear-gradient(
       90deg,
-      rgb(var(--primary) / 0.35) 0%,
-      rgb(var(--secondary) / 0.2) 50%,
-      rgb(var(--primary) / 0.35) 100%
+      theme("colors.primary / 0.35") 0%,
+      theme("colors.secondary / 0.2") 50%,
+      theme("colors.primary / 0.35") 100%,
     );
 
-  mask-image: linear-gradient(to bottom, transparent 50%, black 100%);
+  mask-image: linear-gradient(to bottom, transparent 50%, theme("colors.background") 100%);
   animation: animation 1s infinite linear;
 }
 
