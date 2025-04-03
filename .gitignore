@@ -134,3 +134,6 @@ dist
 
 # Nix build symlink
 result*
+
+# Vercel depolyment files
+.vercel/

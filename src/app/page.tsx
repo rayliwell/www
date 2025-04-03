@@ -2,6 +2,10 @@ import CodeRing from '@components/CodeRing'
 import LinesAnimation from '@components/LinesAnimation'
 import DotsAnimation from '@components/DotsAnimation'
 
+import Link from 'next/link'
+import { technologies } from '@lib/skills'
+import SkillsCarousel from '@components/SkillsCarousel'
+
 function MainSection() {
   return (
     <div className='relative flex h-full w-full items-center overflow-x-clip'>
@@ -44,10 +48,46 @@ function MainSection() {
   )
 }
 
+async function MySkillsSection() {
+  return (
+    <div className='relative w-full'>
+      <div className='absolute z-background h-full w-full'>
+        <DotsAnimation direction='right' />
+      </div>
+
+      <div className='flex flex-col gap-4 justify-center'>
+        <div className='font-850 mt-10 font-title text-4xl text-center'>
+          My{' '}
+          <span className='bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent'>
+            skills
+          </span>
+          .
+        </div>
+        <div className='flex flex-col gap-4 mt-10'>
+          <SkillsCarousel direction='left' skills={Object.keys(technologies)} />
+          <SkillsCarousel direction='right' skills={Object.keys(technologies)} />
+          <SkillsCarousel direction='left' skills={Object.keys(technologies)} />
+        </div>
+
+        <div className='flex justify-center mb-24'>
+          <a
+            href='/skills'
+            className='flex items-center mt-4 text-xl font-bold gap-2 hover:text-primary hover:bg-primary hover:bg-opacity-30 active:bg-opacity-5 rounded-3xl p-2'
+          >
+            All skills
+            <span className='material-arrow-right bg-current w-8 h-8' />
+          </a>
+        </div>
+      </div>
+    </div>
+  )
+}
+
 export default function Home() {
   return (
     <>
       <MainSection />
+      <MySkillsSection />
     </>
   )
 }

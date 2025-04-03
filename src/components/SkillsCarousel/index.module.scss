@@ -1,0 +1,25 @@
+.carousel-left {
+  animation: carousel-scrolling-left var(--carousel-time) linear infinite;
+}
+
+.carousel-right {
+  animation: carousel-scrolling-right var(--carousel-time) linear infinite;
+}
+
+@keyframes carousel-scrolling-left {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-100%);
+  }
+}
+
+@keyframes carousel-scrolling-right {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(100%);
+  }
+}
