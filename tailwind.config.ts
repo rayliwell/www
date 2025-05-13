@@ -79,7 +79,7 @@ function containerPlugin() {
 }
 
 export default {
-  content: ['./src/**/*.{,js,jsx,mdx,tsx}'],
+  content: ['./src/**/*.{,js,jsx,mdx,tsx}', './blog/**/*.md?'],
   theme: {
     scroller: {
       title: {
