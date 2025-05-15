@@ -137,3 +137,7 @@ result*
 
 # Vercel depolyment files
 .vercel/
+
+# Blog posts
+/src/blog.ts
+/blog/

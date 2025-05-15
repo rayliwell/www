@@ -152,7 +152,12 @@
         };
 
         devShells = {
-          default = pkgs.mkShell { buildInputs = [ nodejs ]; };
+          default = pkgs.mkShell {
+            buildInputs = [
+              pkgs.just
+              nodejs
+            ];
+          };
         };
       }
     );
