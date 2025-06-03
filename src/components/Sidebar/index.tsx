@@ -1,17 +1,22 @@
+import { BlogPost, getBlogPosts } from '@lib/blog'
+import posts from '@blog'
 import classes from './index.module.scss'
 
 import IconButton from '@components/IconButton'
+import BlogTitle from '@components/BlogTitle'
 
 export const id = 'sidebarMenu'
 
 const links = [
   { displayName: 'Home', href: '/' },
+  { displayName: 'Blog posts', href: '/blog' },
   { displayName: 'My skills', href: '/skills' },
   { displayName: 'About me', href: '/about' },
   { displayName: 'Projects', href: '/projects' },
 ] as const
 
 export default async function Sidebar() {
+  let [latestBlogPost] = await getBlogPosts(posts)
 
   return (
     <div
@@ -35,6 +40,15 @@ export default async function Sidebar() {
               {displayName}
             </a>
           ))}
+        </div>
+        <div>
+          <a
+            className='basis-0 grow text-xs p-4 flex rounded-lg border border-secondary border-opacity-15 leading-normal bg-secondary bg-opacity-10'
+            href={latestBlogPost.metadata.href}
+            key={latestBlogPost.metadata.date}
+          >
+            <BlogTitle size='small' metadata={latestBlogPost.metadata} />
+          </a>
         </div>
       </div>
     </div>
