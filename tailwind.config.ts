@@ -1,4 +1,5 @@
 import typographyPlugin from '@tailwindcss/typography'
+import formsPlugin from '@tailwindcss/forms'
 import scrollerPlugin from 'tailwindcss-scroller'
 
 import plugin from 'tailwindcss/plugin'
@@ -132,6 +133,8 @@ export default {
     iconPlugin('spinners', 'svg-spinners', {
       webpackModule: true,
     }),
+    formsPlugin,
+    typographyPlugin,
     scrollerPlugin,
   ],
 }
