@@ -91,6 +91,8 @@ export default {
     },
     extend: {
       colors: {
+        background: 'hsl(from rgb(var(--primary)) h calc(s / 5) 4)',
+        text: 'hsl(from rgb(var(--primary)) h calc(s / 4) 85)',
         primary: 'rgb(var(--primary) / <alpha-value>)',
         secondary: 'rgb(var(--secondary) / <alpha-value>)',
       },
