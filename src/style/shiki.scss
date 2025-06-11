@@ -1,0 +1,82 @@
+.shiki {
+  @apply rounded-lg border border-secondary border-opacity-15 leading-normal;
+  @apply bg-secondary bg-opacity-10 !important;
+}
+
+.inline-code>.shiki {
+  @apply inline;
+}
+
+div>.shiki {
+  $focus-time: 0.35s;
+  $spacing: theme("spacing.5");
+
+  @apply flex overflow-auto py-2;
+
+  code {
+    flex-grow: 1;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+
+    padding-left: $spacing;
+  }
+
+  &.has-focused {
+    .line:not(.focused) {
+      transition: filter $focus-time, opacity $focus-time;
+      filter: blur(0.15rem);
+      opacity: 0.9;
+    }
+
+    &:hover .line:not(.focused) {
+      filter: blur(0);
+      opacity: 1;
+    }
+  }
+
+  .line {
+    margin-left: calc(0rem - $spacing);
+    padding-left: $spacing;
+
+    &:empty::before {
+      // Zero-width space to ensure that empty lines still show.
+      content: '\200b';
+    }
+
+    &.highlighted {
+      @apply bg-secondary bg-opacity-30;
+    }
+
+    .highlighted-word {
+      @apply rounded bg-primary bg-opacity-25 border border-primary border-opacity-15 backdrop-blur-sm;
+    }
+
+    &.diff {
+      &::before {
+        font-variant-ligatures: none;
+        position: absolute;
+        left: theme("spacing.1");
+      }
+
+      &.add {
+        background-color: rgba(0, 255, 0, 0.2);
+
+        &::before {
+          content: '+';
+          color: theme("colors.green.400");
+        }
+      }
+
+      &.remove {
+        background-color: rgba(255, 0, 0, 0.2);
+
+        &::before {
+          content: '-';
+          color: theme("colors.red.400");
+        }
+      }
+    }
+  }
+}
