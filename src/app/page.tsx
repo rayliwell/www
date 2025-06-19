@@ -2,7 +2,11 @@ import CodeRing from '@components/CodeRing'
 import LinesAnimation from '@components/LinesAnimation'
 import DotsAnimation from '@components/DotsAnimation'
 
+import { BlogPost, getBlogPosts } from '@lib/blog'
+import posts from '@blog'
+import Title from '@components/BlogTitle'
 import Link from 'next/link'
+
 import { technologies } from '@lib/skills'
 import SkillsCarousel from '@components/SkillsCarousel'
 
@@ -83,11 +87,59 @@ async function MySkillsSection() {
   )
 }
 
+async function LatestPostsSection() {
+  let blogPosts = await getBlogPosts(posts)
+
+  return (
+    <div className='relative w-full'>
+      <div className='absolute z-background h-full w-full'>
+        <DotsAnimation direction='left' />
+      </div>
+
+      <div className='container mx-auto px-4 flex flex-col gap-4 justify-center'>
+        <div className='font-850 mt-10 font-title text-4xl text-center'>
+          Latest{' '}
+          <span className='bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent'>
+            articles
+          </span>
+          .
+        </div>
+
+        <div className='flex gap-8 flex-col lg:flex-row justify-around items-stretch mt-10'>
+          {Iterator.from(blogPosts)
+            .take(3)
+            .map((post: BlogPost) => (
+              <Link
+                className='basis-0 grow p-4 flex rounded-lg border border-secondary border-opacity-15 leading-normal bg-secondary bg-opacity-10'
+                href={post.metadata.href}
+                key={post.metadata.date}
+              >
+                <Title size='medium' metadata={post.metadata} />
+              </Link>
+            ))
+            .toArray()}
+        </div>
+
+        <div className='flex justify-center mb-24'>
+          <a
+            href='/blog'
+            className='flex items-center mt-4 text-xl font-bold gap-2 hover:text-primary hover:bg-primary hover:bg-opacity-30 active:bg-opacity-5 rounded-3xl p-2'
+          >
+            All articles
+            <span className='material-arrow-right bg-current w-8 h-8' />
+          </a>
+        </div>
+      </div>
+    </div>
+  )
+}
+
 export default function Home() {
   return (
     <>
       <MainSection />
       <MySkillsSection />
+      <LatestPostsSection />
     </>
   )
 }
