@@ -12,7 +12,7 @@ export default function ColorMenu() {
   return (
     <div
       id={id}
-      className='border-1 fixed inset-[unset] right-4 top-16 z-menu m-0 grid-cols-3 gap-5 rounded-md border-solid border-primary border-opacity-20 bg-primary bg-opacity-20 p-2 backdrop-blur-sm *:aspect-square *:w-7 *:bg-gradient-to-r *:from-primary *:to-secondary *:[clip-path:circle()] [&:popover-open]:grid'
+      className='border-1 fixed inset-[unset] right-4 top-16 z-menu m-0 grid-cols-3 auto-rows-min gap-5 rounded-md border-solid border-primary border-opacity-20 bg-primary bg-opacity-20 p-2 backdrop-blur-sm *:aspect-square *:w-7 *:bg-gradient-to-r *:from-primary *:to-secondary *:[clip-path:circle()] [&:popover-open]:grid'
       popover='auto'
     >
       {colors.map((color) => (
