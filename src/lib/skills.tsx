@@ -69,7 +69,7 @@ export const technologies: Technologies = {
   Go: {
     categories: ['Back-end'],
     icon: 'logos-go',
-    skill: 1,
+    skill: 3,
   },
   Redux: {
     categories: ['Web technolgies'],
@@ -84,7 +84,7 @@ export const technologies: Technologies = {
   'Github actions': {
     categories: ['Deployment'],
     icon: 'logos-github',
-    skill: 2,
+    skill: 3,
   },
   Linux: {
     categories: ['Back-end', 'Deployment'],
@@ -104,7 +104,7 @@ export const technologies: Technologies = {
   'ASP.NET': {
     categories: ['Back-end'],
     icon: 'logos-dotnet',
-    skill: 2,
+    skill: 3,
   },
   MySQL: {
     categories: ['Back-end'],
@@ -141,4 +141,24 @@ export const technologies: Technologies = {
     icon: 'logos-apachekafka',
     skill: 1,
   },
+  Kubernetes: {
+    categories: ['Deployment'],
+    icon: 'logos-kubernetes',
+    skill: 2
+  },
+  AWS: {
+    categories: ['Deployment'],
+    icon: 'logos-amazonaws',
+    skill: 3
+  },
+  'Google Cloud': {
+    categories: ['Deployment'],
+    icon: 'logos-googlecloud',
+    skill: 3
+  },
+  'React Native': {
+    categories: ['Web technologies'],
+    icon: 'logos-react',
+    skill: 3
+  }
 } as const
