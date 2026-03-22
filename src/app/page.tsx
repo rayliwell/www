@@ -35,8 +35,8 @@ function MainSection() {
         <div className='mt-3 inline-flex w-full leading-[2!important] text-3xl lg:text-3xl'>
           Working with&nbsp;
           <div className='relative inline-flex grow overflow-hidden'>
-            <div className='flex flex-col scroller-title-[5]'>
-              {['NixOS', 'TypeScript', 'Rust', 'JavaScript', 'C#'].map((item) => (
+            <div className='flex flex-col scroller-title-[7]'>
+              {['TypeScript', 'Rust', 'Go', 'React Native', 'JavaScript', 'C#', 'React'].map((item) => (
                 <div key={item} className='flex [white-space-collapse:collapse]'>
                   <div className='bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent [white-space-collapse:collapse]'>
                     {item}
